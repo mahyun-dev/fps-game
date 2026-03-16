@@ -1,8 +1,7 @@
 [build]
-builder = "RAILPACK"
-buildCommand = "cd server && npm install"
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
 watchPatterns = ["server/**"]
 
 [deploy]
-startCommand = "cd server && npm start"
 restartPolicyType = "ON_FAILURE"
