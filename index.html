@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEON STRIKE // Web Arena</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div class="backdrop"></div>
+    <canvas id="gameCanvas" aria-label="FPS game canvas"></canvas>
+
+    <div class="hud-shell">
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">GitHub Pages + Railway</p>
+                <h1>NEON STRIKE</h1>
+            </div>
+            <div class="status-cluster">
+                <span class="status-pill" id="connectionStatus">OFFLINE PRACTICE</span>
+                <span class="status-pill muted" id="roomStatus">ROOM SOLO</span>
+            </div>
+        </header>
+
+        <section class="control-panel" id="menuPanel">
+            <div class="panel-card hero-card">
+                <p class="section-label">Arena Boot</p>
+                <h2>브라우저에서 바로 실행되는 소형 멀티 FPS</h2>
+                <p class="hero-copy">기본 이동, 점프, 사격, 재장전, 표적 연습, 룸 입장까지 포함된 시작점입니다. 루트는 GitHub Pages에 배포하고, server 폴더는 Railway에 올리면 됩니다.</p>
+                <div class="hero-stats">
+                    <div>
+                        <span>Mode</span>
+                        <strong>1v1 / 2v2</strong>
+                    </div>
+                    <div>
+                        <span>Netcode</span>
+                        <strong>WebSocket</strong>
+                    </div>
+                    <div>
+                        <span>Deploy</span>
+                        <strong>Pages + Railway</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-card form-card">
+                <label>
+                    <span>닉네임</span>
+                    <input id="playerName" type="text" maxlength="18" placeholder="Player" value="Player">
+                </label>
+                <label>
+                    <span>룸 코드</span>
+                    <input id="roomCode" type="text" maxlength="12" placeholder="arena-01" value="arena-01">
+                </label>
+                <label>
+                    <span>서버 주소</span>
+                    <input id="serverUrl" type="url" placeholder="wss://your-railway-app.up.railway.app" value="ws://localhost:2567">
+                </label>
+                <div class="button-row">
+                    <button id="practiceButton" class="primary">연습 시작</button>
+                    <button id="connectButton" class="secondary">온라인 연결</button>
+                </div>
+                <p class="form-note">마우스를 클릭하면 포인터 잠금이 활성화됩니다. ESC로 해제할 수 있습니다.</p>
+            </div>
+
+            <div class="panel-card info-card">
+                <p class="section-label">Controls</p>
+                <ul>
+                    <li>WASD 이동, Space 점프, Shift 대시</li>
+                    <li>좌클릭 사격, R 재장전</li>
+                    <li>표적 명중 시 스코어 상승</li>
+                    <li>온라인 연결 시 최대 4명 룸 동기화</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="live-hud" id="liveHud">
+            <div class="vitals">
+                <div>
+                    <span>HP</span>
+                    <strong id="hpValue">100</strong>
+                </div>
+                <div>
+                    <span>Ammo</span>
+                    <strong id="ammoValue">24 / 96</strong>
+                </div>
+                <div>
+                    <span>Score</span>
+                    <strong id="scoreValue">0</strong>
+                </div>
+            </div>
+            <div class="crosshair" aria-hidden="true"></div>
+            <aside class="scoreboard">
+                <p class="section-label">Roster</p>
+                <div id="rosterList">오프라인 연습 모드</div>
+            </aside>
+        </section>
+    </div>
+
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="https://cdn.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
+    <script src="./app.js" defer></script>
+</body>
+</html>

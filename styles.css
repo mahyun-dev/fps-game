@@ -1,0 +1,327 @@
+:root {
+    color-scheme: dark;
+    --bg-top: #03111f;
+    --bg-bottom: #02060d;
+    --panel: rgba(6, 17, 28, 0.78);
+    --panel-border: rgba(130, 211, 255, 0.18);
+    --line: rgba(164, 235, 255, 0.7);
+    --accent: #7df9ff;
+    --accent-2: #ffa53d;
+    --text-main: #eef7ff;
+    --text-dim: #95aeca;
+    --danger: #ff6f6f;
+    --success: #8cff9f;
+    --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+    color: var(--text-main);
+    font-family: "Space Grotesk", sans-serif;
+}
+
+body {
+    position: relative;
+}
+
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(circle at top left, rgba(0, 214, 255, 0.16), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(255, 165, 61, 0.14), transparent 24%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 30%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+#gameCanvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 1;
+}
+
+.hud-shell {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.topbar,
+.control-panel,
+.live-hud {
+    pointer-events: auto;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.topbar h1 {
+    margin: 0;
+    font: 400 clamp(3rem, 8vw, 5.6rem) / 0.9 "Bebas Neue", sans-serif;
+    letter-spacing: 0.08em;
+}
+
+.eyebrow,
+.section-label {
+    margin: 0 0 8px;
+    color: var(--accent);
+    font-size: 0.8rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+}
+
+.status-cluster {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.status-pill {
+    padding: 10px 14px;
+    border: 1px solid var(--panel-border);
+    border-radius: 999px;
+    background: rgba(5, 13, 20, 0.72);
+    box-shadow: var(--shadow);
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+}
+
+.status-pill.muted {
+    color: var(--text-dim);
+}
+
+.control-panel {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 0.9fr;
+    gap: 18px;
+    align-items: end;
+}
+
+.panel-card {
+    min-height: 220px;
+    padding: 22px;
+    border: 1px solid var(--panel-border);
+    border-radius: 24px;
+    background: var(--panel);
+    backdrop-filter: blur(18px);
+    box-shadow: var(--shadow);
+}
+
+.hero-card h2 {
+    margin: 0 0 14px;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    line-height: 0.96;
+}
+
+.hero-copy {
+    margin: 0;
+    max-width: 38rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+}
+
+.hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 20px;
+}
+
+.hero-stats div {
+    padding: 14px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.hero-stats span,
+.vitals span {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.hero-stats strong,
+.vitals strong {
+    font-size: 1.15rem;
+}
+
+.form-card {
+    display: grid;
+    gap: 12px;
+}
+
+.form-card label {
+    display: grid;
+    gap: 6px;
+}
+
+.form-card span {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+}
+
+.form-card input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    background: rgba(0, 0, 0, 0.26);
+    color: var(--text-main);
+    font: inherit;
+}
+
+.button-row {
+    display: flex;
+    gap: 12px;
+}
+
+button {
+    flex: 1;
+    padding: 14px 18px;
+    border: 0;
+    border-radius: 16px;
+    color: #03111f;
+    cursor: pointer;
+    font: 700 0.92rem/1 "Space Grotesk", sans-serif;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: transform 140ms ease, box-shadow 140ms ease, opacity 140ms ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+button.primary {
+    background: linear-gradient(135deg, var(--accent), #d6feff);
+    box-shadow: 0 12px 32px rgba(125, 249, 255, 0.28);
+}
+
+button.secondary {
+    background: linear-gradient(135deg, var(--accent-2), #ffd9a8);
+    box-shadow: 0 12px 32px rgba(255, 165, 61, 0.25);
+}
+
+.form-note,
+.info-card ul,
+#rosterList {
+    margin: 0;
+    color: var(--text-dim);
+    line-height: 1.6;
+}
+
+.info-card ul {
+    padding-left: 18px;
+}
+
+.live-hud {
+    display: none;
+    align-items: end;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.live-hud.active {
+    display: flex;
+}
+
+.vitals {
+    display: flex;
+    gap: 12px;
+}
+
+.vitals > div,
+.scoreboard {
+    min-width: 120px;
+    padding: 14px 16px;
+    border: 1px solid var(--panel-border);
+    border-radius: 18px;
+    background: rgba(2, 8, 14, 0.72);
+    backdrop-filter: blur(18px);
+}
+
+.scoreboard {
+    min-width: min(320px, 42vw);
+}
+
+.crosshair {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 28px;
+    height: 28px;
+    margin-left: -14px;
+    margin-top: -14px;
+    pointer-events: none;
+}
+
+.crosshair::before,
+.crosshair::after {
+    content: "";
+    position: absolute;
+    background: var(--line);
+    box-shadow: 0 0 10px rgba(125, 249, 255, 0.65);
+}
+
+.crosshair::before {
+    inset: 13px 0;
+    height: 2px;
+}
+
+.crosshair::after {
+    inset: 0 13px;
+    width: 2px;
+}
+
+@media (max-width: 960px) {
+    .hud-shell {
+        padding: 18px;
+    }
+
+    .control-panel {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-stats,
+    .button-row,
+    .vitals,
+    .live-hud {
+        grid-template-columns: 1fr;
+        flex-direction: column;
+    }
+
+    .scoreboard {
+        width: 100%;
+        min-width: 0;
+    }
+}

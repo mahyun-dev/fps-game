@@ -1,0 +1,8 @@
+[build]
+builder = "RAILPACK"
+buildCommand = "cd server && npm install"
+watchPatterns = ["server/**"]
+
+[deploy]
+startCommand = "cd server && npm start"
+restartPolicyType = "ON_FAILURE"
