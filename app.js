@@ -231,7 +231,7 @@ function updateHud() {
 
 function applyMovement() {
     const direction = new BABYLON.Vector3.Zero();
-    const forward = camera.getDirection(BABYLON.Axis.Z).scale(-1);
+    const forward = camera.getDirection(BABYLON.Axis.Z);
     const right = camera.getDirection(BABYLON.Axis.X);
     forward.y = 0;
     right.y = 0;
