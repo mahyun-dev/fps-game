@@ -520,10 +520,10 @@ function transmitPlayerState(now) {
 
 window.addEventListener("keydown", (event) => {
     if (event.code === "KeyW") {
-        gameState.move.forward = 1;
+        gameState.move.forward = -1;
     }
     if (event.code === "KeyS") {
-        gameState.move.forward = -1;
+        gameState.move.forward = 1;
     }
     if (event.code === "KeyA") {
         gameState.move.right = -1;
